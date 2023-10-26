@@ -9,4 +9,13 @@ class NotesModel extends ChangeNotifier {
     notes.add(newNote);
     notifyListeners();
   }
+
+  void updateNote(Note oldNote, String newTitle, String newDescription) {
+    final int noteIndex = notes.indexOf(oldNote);
+    if (noteIndex != -1) {
+      notes[noteIndex].updateTitle(newTitle);
+      notes[noteIndex].description = newDescription;
+      notifyListeners();
+    }
+  }
 }
