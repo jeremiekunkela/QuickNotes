@@ -18,4 +18,14 @@ class NotesModel extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void deleteNote(Note note) {
+    notes.remove(note);
+    notifyListeners();
+  }
+
+  void deleteAllNotes() {
+    notes.clear();
+    notifyListeners();
+  }
 }
