@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quick_notes/archive_screen.dart';
 import 'package:quick_notes/notes_model.dart';
 import 'add_note_screen.dart';
 import 'note_list.dart';
@@ -15,12 +16,15 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Quick Notes',
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic)),
+        title: const Text(
+          'Quick Notes',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -32,13 +36,36 @@ class HomePage extends StatelessWidget {
           ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.delete,
-              color: Colors.red,
-            ),
-            onPressed: () {
-              notesModel.deleteAllNotes();
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'clearAll') {
+                notesModel.deleteAllNotes();
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ArchiveScreen(notesModel.archivedNotes),
+                  ),
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                const PopupMenuItem<String>(
+                  value: 'clearAll',
+                  child: Text(
+                    'Clear All',
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+                const PopupMenuItem<String>(
+                  value: 'viewArchives',
+                  child: Text('Voir les archives'),
+                ),
+              ];
             },
           ),
         ],
