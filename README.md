@@ -39,7 +39,7 @@ Quick Notes offre les fonctionnalités suivantes :
 - Archivage de notes : Archivez des notes que vous souhaitez conserver sans les supprimer.
 - Suppression de notes : Supprimez des notes dont vous n'avez plus besoin.
 
-![Capture d'écran de Quick Notes](screenshot.png)
+![Capture d'écran de Quick Notes](https://github.com/jeremiekunkela/quick-notes/blob/main/tenor.gif)
 
 
 ## Technologies utilisées
