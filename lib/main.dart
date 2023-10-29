@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quick_notes/home_page.dart';
-import 'package:quick_notes/notes_model.dart';
+import 'package:quick_notes/screens/home_page_screen.dart';
+import 'package:quick_notes/providers/notes_provider.dart';
 
 void main() {
   runApp(

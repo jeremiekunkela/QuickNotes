@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quick_notes/note.dart';
+import 'package:quick_notes/models/note.dart';
 
 class NotesModel extends ChangeNotifier {
   List<Note> notes = [];
@@ -9,7 +9,6 @@ class NotesModel extends ChangeNotifier {
     Note newNote = Note(
         title: title,
         description: description,
-        createdTime: DateTime.now(),
         lastEditedTime: DateTime.now());
     notes.add(newNote);
     notifyListeners();

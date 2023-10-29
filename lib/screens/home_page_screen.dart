@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quick_notes/archive_screen.dart';
-import 'package:quick_notes/notes_model.dart';
-import 'add_note_screen.dart';
-import 'note_list.dart';
+import 'package:quick_notes/providers/notes_provider.dart';
+import 'package:quick_notes/screens/add_note_screen.dart';
+import 'package:quick_notes/screens/archive_screen.dart';
+import 'package:quick_notes/screens/note_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -71,32 +71,35 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: NoteList(notesModel.notes),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AddNoteScreen(),
+      floatingActionButton: Align(
+        alignment: Alignment.bottomCenter,
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddNoteScreen(),
+              ),
+            );
+          },
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                colors: [Colors.blue, Colors.purple],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
             ),
-          );
-        },
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        child: Container(
-          width: 60,
-          height: 60,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: LinearGradient(
-              colors: [Colors.blue, Colors.purple],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 30,
             ),
-          ),
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 30,
           ),
         ),
       ),

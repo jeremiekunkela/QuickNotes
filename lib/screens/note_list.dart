@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quick_notes/add_note_screen.dart';
-import 'package:quick_notes/note.dart';
-import 'package:quick_notes/notes_model.dart';
-import 'package:intl/intl.dart';
+import 'package:quick_notes/helper.dart';
+import 'package:quick_notes/models/note.dart';
+import 'package:quick_notes/providers/notes_provider.dart';
+import 'package:quick_notes/screens/add_note_screen.dart';
 
 class NoteList extends StatelessWidget {
   final List<Note> notes;
@@ -12,59 +12,69 @@ class NoteList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (notes.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/empty_note_image.png', width: 400, height: 300),
+            const SizedBox(height: 20),
+            const Text(
+              'Add a note to get started',
+              style: TextStyle(fontSize: 20, color: Colors.black),
+            ),
+          ],
+        ),
+      );
+    }
     return ListView.builder(
       itemCount: notes.length,
       itemBuilder: (context, index) {
         final notesModel = Provider.of<NotesModel>(context, listen: false);
+        final note = notes[index];
 
         return Dismissible(
-          key: Key(notes[index].title),
+          key: Key(note.title),
           onDismissed: (direction) {
-            if (direction == DismissDirection.startToEnd) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  duration: const Duration(seconds: 1),
-                  content: Text('${notes[index].title} archivée'),
-                ),
-              );
-              notesModel.archiveNote(notes[index]);
+            final isArchive = direction == DismissDirection.startToEnd;
+            final actionText = isArchive ? 'archived' : 'deleted';
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                duration: const Duration(seconds: 1),
+                content: Text('${note.title} $actionText'),
+              ),
+            );
+
+            if (isArchive) {
+              notesModel.archiveNote(note);
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  duration: const Duration(seconds: 1),
-                  content: Text('${notes[index].title} supprimée'),
-                ),
-              );
-              notesModel.deleteNote(notes[index]);
+              notesModel.deleteNote(note);
             }
           },
-          background: Container(
-            color: Colors.green,
-            alignment: Alignment.centerLeft,
-            child: const Icon(
-              Icons.archive,
-              color: Colors.white,
-            ),
-          ),
-          secondaryBackground: Container(
-            color: Colors.red,
-            alignment: Alignment.centerRight,
-            child: const Icon(
-              Icons.delete,
-              color: Colors.white,
-            ),
-          ),
-          child: SizedBox(
-            width: double.infinity,
-            child: GestureDetector(
-              onTap: () {
-                navigateToEditScreen(context, notes[index]);
-              },
-              child: buildNoteCard(context, notes[index]),
-            ),
+          background: buildDismissibleBackground(Colors.green, Icons.archive),
+          secondaryBackground:
+              buildDismissibleBackground(Colors.red, Icons.delete),
+          child: GestureDetector(
+            onTap: () {
+              navigateToEditScreen(context, note);
+            },
+            child: buildNoteCard(context, note),
           ),
         );
       },
+    );
+  }
+
+  Widget buildDismissibleBackground(Color color, IconData icon) {
+    return Container(
+      color: color,
+      alignment:
+          color == Colors.green ? Alignment.centerLeft : Alignment.centerRight,
+      child: Icon(
+        icon,
+        color: Colors.white,
+      ),
     );
   }
 
@@ -81,8 +91,6 @@ class NoteList extends StatelessWidget {
   }
 
   Widget buildNoteCard(BuildContext context, Note note) {
-    final dateFormat = DateFormat(' MMM dd, yyyy, hh:mm a');
-
     return Card(
       child: Column(
         children: [
@@ -114,7 +122,7 @@ class NoteList extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  dateFormat.format(note.lastEditedTime.toLocal()),
+                  AppHelper.formatCurrentDate(),
                   style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ],

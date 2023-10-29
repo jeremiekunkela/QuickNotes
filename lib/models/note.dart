@@ -1,13 +1,11 @@
 class Note {
   String title;
   String description;
-  DateTime createdTime;
   DateTime lastEditedTime;
 
   Note({
     required this.title,
     required this.description,
-    required this.createdTime,
     required this.lastEditedTime,
   });
 
@@ -17,12 +15,7 @@ class Note {
   }
 
   factory Note.createNew({required String title, required String description}) {
-    final currentTime = DateTime.now();
     return Note(
-      title: title,
-      description: description,
-      createdTime: currentTime,
-      lastEditedTime: currentTime,
-    );
+        title: title, description: description, lastEditedTime: DateTime.now());
   }
 }
