@@ -7,7 +7,7 @@ import 'package:quick_notes/providers/notes_provider.dart';
 class ArchiveScreen extends StatelessWidget {
   final List<Note> archivedNotes;
 
-  ArchiveScreen(this.archivedNotes);
+  ArchiveScreen(this.archivedNotes, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
