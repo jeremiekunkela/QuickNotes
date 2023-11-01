@@ -1,6 +1,6 @@
 # Quick Notes - Application de prise de notes rapide
 
-Quick Notes est une application Flutter qui permet aux utilisateurs de créer, supprimer, modifier et archiver des notes rapidement. Elle a été développée dans le cadre d'un projet d'une semaine concluant un module Flutter de mon enseignement supérieur.
+Quick Notes est une application Flutter qui permet aux utilisateurs de créer, supprimer, modifier et archiver des notes rapidement. Elle a été développée dans le cadre d'un projet de moins d'une semaine concluant un module Flutter de mon enseignement supérieur.
 
 ## Installation
 
@@ -39,7 +39,7 @@ Quick Notes offre les fonctionnalités suivantes :
 - Archivage de notes : Archivez des notes que vous souhaitez conserver sans les supprimer.
 - Suppression de notes : Supprimez des notes dont vous n'avez plus besoin.
 
-![Capture d'écran de Quick Notes](https://github.com/jeremiekunkela/quick-notes/blob/main/tenor.gif)
+<img src="https://github.com/jeremiekunkela/quick-notes/blob/main/quick_notes.gif" width="400">
 
 
 ## Technologies utilisées
