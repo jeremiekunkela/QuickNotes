@@ -52,14 +52,11 @@ Quick Notes a été développé en utilisant les technologies suivantes :
 ## Auteur
 
 - Jérémie Kunkela
-- GitHub : https://github.com/jeremiekunkela
 
 ## Licence
 
 Ce projet est personnel et n'est pas soumis à une licence spécifique. Vous êtes libre de l'utiliser à des fins personnelles et éducatives.
----
 
-J'éspère que Quick Notes vous sera utile pour prendre des notes rapidement. N'hésitez pas à signaler tout problème ou à proposer des améliorations. Bonne utilisation !
 
 
 
